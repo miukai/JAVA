@@ -4,20 +4,24 @@ class HighLowgame{
   public static void main(String...args){
     Title title = new Title();
     Mondai mondai = new Mondai();
-    Hantei hantei = new Hantei();
+    Choice choice = new Choice();
     Kekka kekka = new Kekka();
     //タイトルの表示
     title.hyouji();
-
     for(int y = 1; y == 1;){
-    Random randoms = new Random();
-     int randomValue = randoms.nextInt(9)+1;
-    mondai.hyouji(randomValue);
-     char z = hantei.hyouji();
-      if ((z != 'h') && (z != 'l')){
-        break;
-      }
-    y = kekka.hyouji(hantei.c,randomValue);
+      Random randoms = new Random();
+      int randomValue = randoms.nextInt(9)+1;
+      //問題表示
+      mondai.hyouji(randomValue);
+      //ｈかｌを選ばせる
+      char z = choice.hyouji();
+          //ｈかｌが入力されなかった場合ループを抜ける
+        if ((z != 'h') && (z != 'l')){
+          break;
+        }
+      //結果表示メソッド
+      //引数として、プレイヤー選択したｈかｌの入った変数cと、問題カードの値を渡す
+      y = kekka.hyouji(choice.c,randomValue);
     }
     System.out.println("--GAME" + "OVER--");
   }
@@ -38,6 +42,7 @@ class Title{
   }
 }
 
+//問題
 class Mondai{
   public void hyouji(int randomValue){
     System.out.println("[Q hyouji]");
@@ -71,8 +76,9 @@ class Mondai{
   }
 }
 
-
-class Hantei{
+//ｈかｌを選ぶ
+class Choice{
+  // ｈかｌを格納する変数
   char c;
   public char hyouji(){
     Scanner scanner = new Scanner(System.in);
@@ -90,7 +96,7 @@ class Hantei{
   }
   }
 
-
+//問題クラスを継承する
 class Kekka extends Mondai{
   public int hyouji(char c,int randomValue){
     Random random = new Random();
